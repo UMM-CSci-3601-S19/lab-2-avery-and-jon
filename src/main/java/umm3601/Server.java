@@ -56,7 +56,7 @@ public class Server {
   }
 
   /***
-   * Create a database using the json fie, use it as
+   * Create a database using the json file, use it as
    * data source for a new UserController
    *
    * Constructing the controller might throw an IOException if
