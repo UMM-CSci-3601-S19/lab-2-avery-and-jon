@@ -3,7 +3,9 @@ package umm3601;
 import spark.Filter;
 import spark.Request;
 import spark.Response;
+import umm3601.todo.ToDoDatabase;
 import umm3601.user.Database;
+import umm3601.todo.ToDoController;
 import umm3601.user.UserController;
 
 import java.io.IOException;
@@ -14,12 +16,15 @@ import static spark.debug.DebugScreen.*;
 public class Server {
 
   public static final String USER_DATA_FILE = "src/main/data/users.json";
+  public static final String TODO_DATA_FILE = "src/main/data/todos.json";
   private static Database userDatabase;
+  private static ToDoDatabase todoDatabase;
 
   public static void main(String[] args) {
 
     // Initialize dependencies
     UserController userController = buildUserController();
+    ToDoController todoController = buildToDoController();
 
     // Configure Spark
     port(4567);
@@ -41,7 +46,7 @@ public class Server {
     // List users, filtered using query parameters
     get("api/users", userController::getUsers);
     // List toDos
-    get("api/todos", userController::getToDos);
+    get("api/todos", todoController::getToDos);
 
     // An example of throwing an unhandled exception so you can see how the
     // Java Spark debugger displays errors like this.
@@ -83,6 +88,24 @@ public class Server {
     }
 
     return userController;
+  }
+
+  private static ToDoController buildToDoController() {
+    ToDoController todoController = null;
+
+    try {
+      todoDatabase = new ToDoDatabase(TODO_DATA_FILE);
+      todoController = new ToDoController(todoDatabase);
+    } catch (IOException e) {
+      System.err.println("The server failed to load the todo data; shutting down.");
+      e.printStackTrace(System.err);
+
+      // Shut the server down
+      stop();
+      System.exit(1);
+    }
+
+    return todoController;
   }
 
   // Enable GZIP for all responses
