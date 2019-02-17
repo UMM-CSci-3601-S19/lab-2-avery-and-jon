@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 
 public class ToDoDatabase {
@@ -18,6 +19,15 @@ public class ToDoDatabase {
   public ToDo[] listToDos(Map<String, String[]> queryParams) {
     ToDo[] filteredUsers = allToDos;
 
+    if (queryParams.containsKey("limit")) {
+      int limit = Integer.parseInt(queryParams.get("limit")[0]);
+      filteredUsers = filterToDosByLimit(filteredUsers, limit);
+    }
+
     return filteredUsers;
+  }
+
+  public ToDo[] filterToDosByLimit(ToDo[] toDos, int limit) {
+    return new ToDo[0];
   }
 }
