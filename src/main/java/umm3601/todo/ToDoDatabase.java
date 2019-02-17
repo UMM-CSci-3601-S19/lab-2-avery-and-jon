@@ -17,14 +17,14 @@ public class ToDoDatabase {
   }
 
   public ToDo[] listToDos(Map<String, String[]> queryParams) {
-    ToDo[] filteredUsers = allToDos;
+    ToDo[] filteredToDos = allToDos;
 
     if (queryParams.containsKey("limit")) {
       int limit = Integer.parseInt(queryParams.get("limit")[0]);
-      filteredUsers = filterToDosByLimit(filteredUsers, limit);
+      filteredToDos = filterToDosByLimit(filteredToDos, limit);
     }
 
-    return filteredUsers;
+    return filteredToDos;
   }
 
   public ToDo[] filterToDosByLimit(ToDo[] toDos, int limit) {
