@@ -14,7 +14,7 @@
 <div id="jsonDump" style="margin-top:20px">JSON will go here</div>
 
 <label for="limit">limit:</label><input id="limit" type="text" name="limit">
-<button type="button" id="limitToDoResults">limit todo results</button>
+<button type="button" id="filterToDos">Filter Todos</button>
 
 <script>
   window.onload = function () {
@@ -23,7 +23,7 @@
     var element = document.getElementById('getAll');
     element.addEventListener("click", getAllToDos, true);
 
-    element = document.getElementById('limitToDoResults');
+    element = document.getElementById('filterToDos');
     element.addEventListener("click", getAllToDosWithLimit, true);
   }
 </script>
