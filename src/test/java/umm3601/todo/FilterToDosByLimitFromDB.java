@@ -38,7 +38,7 @@ public class FilterToDosByLimitFromDB {
     ToDo[] limit7ToDos = db.listToDos(queryParams);
     assertEquals("Incorrect number of todos", 7, limit7ToDos.length);
 
-    queryParams.put("limit", new String[]{"7"});
+    queryParams.put("limit", new String[]{"15"});
     ToDo[] limit15ToDos = db.listToDos(queryParams);
     assertEquals("Incorrect number of todos", 15, limit15ToDos.length);
   }
