@@ -28,6 +28,10 @@ public class ToDoDatabase {
   }
 
   public ToDo[] filterToDosByLimit(ToDo[] toDos, int limit) {
-    return new ToDo[0];
+    ToDo[] firstXToDos;
+    // case where provided limit is greater than (or equal to) the length of the array to filter
+    if (limit >= toDos.length) { firstXToDos = toDos; }
+    else { firstXToDos = Arrays.copyOfRange(toDos,0, limit); }
+    return firstXToDos;
   }
 }
