@@ -28,4 +28,18 @@ public class FilterToDosByLimitFromDB {
     ToDo[] limit1000ToDos = db.filterToDosByLimit(allToDos, 1000);
     assertEquals("Incorrect number of todos", allToDos.length, limit1000ToDos.length);
   }
+
+  @Test
+  public void listToDosWithLimitFilter() throws IOException {
+    ToDoDatabase db = new ToDoDatabase("src/main/data/todos.json");
+    Map<String, String[]> queryParams = new HashMap<>();
+
+    queryParams.put("limit", new String[]{"7"});
+    ToDo[] limit7ToDos = db.listToDos(queryParams);
+    assertEquals("Incorrect number of todos", 7, limit7ToDos.length);
+
+    queryParams.put("limit", new String[]{"7"});
+    ToDo[] limit15ToDos = db.listToDos(queryParams);
+    assertEquals("Incorrect number of todos", 15, limit15ToDos.length);
+  }
 }
