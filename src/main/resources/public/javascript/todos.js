@@ -11,6 +11,26 @@ function getAllToDos() {
 }
 
 /**
+ * Request all todos unless a limit is specified
+ */
+function getAllToDosWithLimit() {
+  console.log("Getting all the todos.");
+
+  var httpClient = new HttpClient();
+  var limit = document.getElementById('limit').value;
+
+  if (limit === "") {
+    httpClient.get("/api/todos", function (returned_json) {
+      document.getElementById('jsonDump').innerHTML = returned_json;
+    });
+  } else {
+    httpClient.get("/api/todos?limit=" + limit, function (returned_json) {
+      document.getElementById('jsonDump').innerHTML = returned_json;
+    });
+  }
+}
+
+/**
  * Wrapper to make generating http requests easier. Should maybe be moved
  * somewhere else in the future!.
  *
