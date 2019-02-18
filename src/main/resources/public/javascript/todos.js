@@ -4,7 +4,17 @@
 function filterToDos() {
   console.log("Getting all the todos.");
 
-  // construct the query string based on any inputs with values
+  var queryString = buildQueryString();
+  var httpClient = new HttpClient();
+  httpClient.get("/api/todos" + queryString, function (returnedJson) {
+    document.getElementById("jsonDump").innerHTML = returnedJson;
+  });
+}
+
+/**
+ * Construct the query string based on any inputs with values
+ */
+function buildQueryString() {
   var queryString = "?";
   var filterOptions = document.getElementsByClassName("filter-option");
   var i;
@@ -14,14 +24,9 @@ function filterToDos() {
       queryString += filterOption.name + "=" + filterOption.value + "&";
     }
   }
-  // drop last "&" of queryString
-  queryString = queryString.substring(0,queryString.length-1);
 
-  // make actual GET request and append the query string
-  var httpClient = new HttpClient();
-  httpClient.get("/api/todos" + queryString, function (returnedJson) {
-    document.getElementById("jsonDump").innerHTML = returnedJson;
-  });
+  // drop last "&" of queryString
+  return queryString.substring(0,queryString.length-1);
 }
 
 /**
