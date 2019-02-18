@@ -1,33 +1,27 @@
 /**
- * Function to get all the todos!
+ * Filter todos based on any provided criteria
  */
-function getAllToDos() {
+function filterToDos() {
   console.log("Getting all the todos.");
 
-  var HttpThingy = new HttpClient();
-  HttpThingy.get("/api/todos", function (returned_json) {
-    document.getElementById('jsonDump').innerHTML = returned_json;
-  });
-}
-
-/**
- * Request all todos unless a limit is specified
- */
-function getAllToDosWithLimit() {
-  console.log("Getting all the todos.");
-
-  var httpClient = new HttpClient();
-  var limit = document.getElementById('limit').value;
-
-  if (limit === "") {
-    httpClient.get("/api/todos", function (returned_json) {
-      document.getElementById('jsonDump').innerHTML = returned_json;
-    });
-  } else {
-    httpClient.get("/api/todos?limit=" + limit, function (returned_json) {
-      document.getElementById('jsonDump').innerHTML = returned_json;
-    });
+  // construct the query string based on any inputs with values
+  var queryString = "?";
+  var filterOptions = document.getElementsByClassName("filter-option");
+  var i;
+  for (i = 0; i < filterOptions.length; i++) {
+    var filterOption = filterOptions[i];
+    if (filterOption.value !== "") {
+      queryString += filterOption.name + "=" + filterOption.value + "&";
+    }
   }
+  // drop last "&" of queryString
+  queryString = queryString.substring(0,queryString.length-1);
+
+  // make actual GET request and append the query string
+  var httpClient = new HttpClient();
+  httpClient.get("/api/todos" + queryString, function (returnedJson) {
+    document.getElementById("jsonDump").innerHTML = returnedJson;
+  });
 }
 
 /**
