@@ -23,6 +23,10 @@ public class ToDoDatabase {
       int limit = Integer.parseInt(queryParams.get("limit")[0]);
       filteredToDos = filterToDosByLimit(filteredToDos, limit);
     }
+    if (queryParams.containsKey("status")) {
+      String status = queryParams.get("status")[0];
+      filteredToDos = filterToDosByStatus(filteredToDos, status);
+    }
 
     return filteredToDos;
   }
@@ -33,5 +37,15 @@ public class ToDoDatabase {
     if (limit >= toDos.length) { firstXToDos = toDos; }
     else { firstXToDos = Arrays.copyOfRange(toDos,0, limit); }
     return firstXToDos;
+  }
+
+  public ToDo[] filterToDosByStatus (ToDo[] toDos, String status) {
+    boolean statusBoolean;
+    if (status.equals("complete")) {
+      statusBoolean = true;
+    } else {
+      statusBoolean = false;
+    }
+    return Arrays.stream(toDos).filter(x -> x.status == statusBoolean).toArray(ToDo[]::new);
   }
 }
