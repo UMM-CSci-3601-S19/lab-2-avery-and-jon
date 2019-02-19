@@ -27,6 +27,10 @@ public class ToDoDatabase {
       String sub = queryParams.get("contains")[0];
       filteredToDos = filterToDosByContains(filteredToDos, sub);
     }
+    if (queryParams.containsKey("owner")) {
+      String owner = queryParams.get("owner")[0];
+      filteredToDos = filterToDosByOwner(filteredToDos, owner);
+    }
     if (queryParams.containsKey("limit")) {
       int limit = Integer.parseInt(queryParams.get("limit")[0]);
       filteredToDos = filterToDosByLimit(filteredToDos, limit);
@@ -55,5 +59,9 @@ public class ToDoDatabase {
 
   public ToDo[] filterToDosByContains (ToDo[] toDos, String sub) {
     return Arrays.stream(toDos).filter(x -> x.body.contains(sub)).toArray(ToDo[]::new);
+  }
+
+  public ToDo[] filterToDosByOwner (ToDo[] toDos, String owner) {
+    return Arrays.stream(toDos).filter(x -> x.owner.equals(owner)).toArray(ToDo[]::new);
   }
 }
