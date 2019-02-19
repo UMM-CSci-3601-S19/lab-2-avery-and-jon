@@ -21,7 +21,7 @@ function buildQueryString() {
   for (i = 0; i < filterOptions.length; i++) {
     var filterOption = filterOptions[i];
     if (filterOption.value !== "") {
-      queryString += filterOption.name + "=" + filterOption.value + "&";
+      queryString += filterOption.id + "=" + filterOption.value + "&";
     }
   }
 
