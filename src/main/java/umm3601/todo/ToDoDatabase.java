@@ -31,6 +31,10 @@ public class ToDoDatabase {
       String owner = queryParams.get("owner")[0];
       filteredToDos = filterToDosByOwner(filteredToDos, owner);
     }
+    if (queryParams.containsKey("category")) {
+      String category = queryParams.get("category")[0];
+      filteredToDos = filterToDosByCategory(filteredToDos, category);
+    }
     if (queryParams.containsKey("limit")) {
       int limit = Integer.parseInt(queryParams.get("limit")[0]);
       filteredToDos = filterToDosByLimit(filteredToDos, limit);
@@ -63,5 +67,9 @@ public class ToDoDatabase {
 
   public ToDo[] filterToDosByOwner (ToDo[] toDos, String owner) {
     return Arrays.stream(toDos).filter(x -> x.owner.equals(owner)).toArray(ToDo[]::new);
+  }
+
+  public ToDo[] filterToDosByCategory (ToDo[] toDos, String category) {
+    return Arrays.stream(toDos).filter(x -> x.category.equals(category)).toArray(ToDo[]::new);
   }
 }
