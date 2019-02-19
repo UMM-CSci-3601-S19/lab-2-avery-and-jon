@@ -15,8 +15,8 @@ public class FilterToDosByOwnerFromDB {
     ToDoDatabase db = new ToDoDatabase("src/main/data/todos.json");
     ToDo[] allToDos = db.listToDos(new HashMap<>());
 
-    ToDo[] ownedByBlanche = db.filterToDosByContains(allToDos, "Blanche");
-    assertEquals("Incorrect number of todos returned", 76, ownedByBlanche.length);
+    ToDo[] ownedByBlanche = db.filterToDosByOwner(allToDos, "Blanche");
+    assertEquals("Incorrect number of todos returned", 43, ownedByBlanche.length);
   }
 
   @Test
@@ -26,6 +26,6 @@ public class FilterToDosByOwnerFromDB {
 
     queryParams.put("owner", new String[]{"Blanche"});
     ToDo[] ownedByBlanche = db.listToDos(queryParams);
-    assertEquals("Incorrect number of todos returned", 76, ownedByBlanche.length);
+    assertEquals("Incorrect number of todos returned", 43, ownedByBlanche.length);
   }
 }
