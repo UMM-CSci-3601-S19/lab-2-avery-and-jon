@@ -5,6 +5,8 @@ import com.google.gson.Gson;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 public class ToDoDatabase {
@@ -40,7 +42,9 @@ public class ToDoDatabase {
       filteredToDos = filterToDosByLimit(filteredToDos, limit);
     }
 
-    return filteredToDos;
+    ToDo[] sortedToDos = sortToDos(filteredToDos, queryParams.get("orderBy")[0]);
+
+    return sortedToDos;
   }
 
   public ToDo[] filterToDosByLimit(ToDo[] toDos, int limit) {
@@ -71,5 +75,22 @@ public class ToDoDatabase {
 
   public ToDo[] filterToDosByCategory (ToDo[] toDos, String category) {
     return Arrays.stream(toDos).filter(x -> x.category.equals(category)).toArray(ToDo[]::new);
+  }
+
+  // used Option 4 found in https://dev.to/codebyamir/sort-a-list-of-objects-by-field-in-java-3coj
+  public ToDo[] sortToDos(ToDo[] toDos, String sortBy) {
+    ToDo[] sortedToDos;
+    if (sortBy.equals("body")) {
+       sortedToDos = Arrays.stream(toDos).sorted(Comparator.comparing(ToDo::getBody)).toArray(ToDo[]::new);
+    } else if (sortBy.equals("status")) {
+      sortedToDos = Arrays.stream(toDos).sorted(Comparator.comparing(ToDo::getStatus)).toArray(ToDo[]::new);
+    } else if (sortBy.equals("category")) {
+      sortedToDos = Arrays.stream(toDos).sorted(Comparator.comparing(ToDo::getCategory)).toArray(ToDo[]::new);
+    } else {
+      // default sort by owner
+      sortedToDos = Arrays.stream(toDos).sorted(Comparator.comparing(ToDo::getOwner)).toArray(ToDo[]::new);
+    }
+
+    return sortedToDos;
   }
 }
