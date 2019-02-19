@@ -48,4 +48,8 @@ public class ToDoDatabase {
     }
     return Arrays.stream(toDos).filter(x -> x.status == statusBoolean).toArray(ToDo[]::new);
   }
+
+  public ToDo[] filterToDosByContains (ToDo[] toDos, String sub) {
+    return Arrays.stream(toDos).filter(x -> x.body.contains(sub)).toArray(ToDo[]::new);
+  }
 }
