@@ -42,9 +42,11 @@ public class ToDoDatabase {
       filteredToDos = filterToDosByLimit(filteredToDos, limit);
     }
 
-    ToDo[] sortedToDos = sortToDos(filteredToDos, queryParams.get("orderBy")[0]);
+    if (queryParams.containsKey("orderBy")) {
+      filteredToDos = sortToDos(filteredToDos, queryParams.get("orderBy")[0]);
+    }
 
-    return sortedToDos;
+    return filteredToDos;
   }
 
   public ToDo[] filterToDosByLimit(ToDo[] toDos, int limit) {
