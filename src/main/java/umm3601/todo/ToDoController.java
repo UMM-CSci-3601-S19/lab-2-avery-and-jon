@@ -4,10 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import spark.Request;
 import spark.Response;
-import umm3601.todo.ToDoDatabase;
-import umm3601.todo.ToDo;
 
-import static umm3601.Util.buildFailJsonResponse;
 import static umm3601.Util.buildSuccessJsonResponse;
 
 public class ToDoController {
