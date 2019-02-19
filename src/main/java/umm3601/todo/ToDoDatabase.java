@@ -19,13 +19,13 @@ public class ToDoDatabase {
   public ToDo[] listToDos(Map<String, String[]> queryParams) {
     ToDo[] filteredToDos = allToDos;
 
-    if (queryParams.containsKey("limit")) {
-      int limit = Integer.parseInt(queryParams.get("limit")[0]);
-      filteredToDos = filterToDosByLimit(filteredToDos, limit);
-    }
     if (queryParams.containsKey("status")) {
       String status = queryParams.get("status")[0];
       filteredToDos = filterToDosByStatus(filteredToDos, status);
+    }
+    if (queryParams.containsKey("limit")) {
+      int limit = Integer.parseInt(queryParams.get("limit")[0]);
+      filteredToDos = filterToDosByLimit(filteredToDos, limit);
     }
 
     return filteredToDos;
