@@ -16,7 +16,7 @@ public class FilterToDosByContainsFromDB {
     ToDo[] allToDos = db.listToDos(new HashMap<>());
 
     ToDo[] containingIncididunt = db.filterToDosByContains(allToDos, "incididunt");
-    assertEquals("Incorrect number of todos returned", 143, containingIncididunt.length);
+    assertEquals("Incorrect number of todos returned", 76, containingIncididunt.length);
   }
 
   @Test
@@ -26,6 +26,6 @@ public class FilterToDosByContainsFromDB {
 
     queryParams.put("contains", new String[]{"incididunt"});
     ToDo[] containingIncididunt = db.listToDos(queryParams);
-    assertEquals("Incorrect number of todos returned", 143, containingIncididunt.length);
+    assertEquals("Incorrect number of todos returned", 76, containingIncididunt.length);
   }
 }
