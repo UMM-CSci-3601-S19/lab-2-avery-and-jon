@@ -8,7 +8,17 @@
 </head>
 <body>
 
-<label for="limit">Limit: </label><input id="limit" class="filter-option" type="text" name="limit">
+<label for="status">Status: </label>
+<select id="status" class="filter-option">
+  <option value="any">Any</option>
+  <option value="complete">Complete</option>
+  <option value="incomplete">Incomplete</option>
+</select>
+
+<label for="limit">Limit: </label>
+<input id="limit" class="filter-option" type="text" name="limit">
+
+
 <hr/>
 <button type="button" id="filterToDos">Filter Todos</button>
 
