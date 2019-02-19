@@ -8,16 +8,22 @@
 </head>
 <body>
 
-<label for="status">Status: </label>
-<select id="status" class="filter-option">
-  <option value="">Any</option>
-  <option value="complete">Complete</option>
-  <option value="incomplete">Incomplete</option>
-</select>
-
-<label for="limit">Limit: </label>
-<input id="limit" class="filter-option" type="text" name="limit">
-
+<div class="input-wrapper">
+  <label for="limit">Limit: </label>
+  <input id="limit" class="filter-option" type="text" name="limit">
+</div>
+<div class="input-wrapper">
+  <label for="status">Status: </label>
+  <select id="status" class="filter-option">
+    <option value="">Any</option>
+    <option value="complete">Complete</option>
+    <option value="incomplete">Incomplete</option>
+  </select>
+</div>
+<div class="input-wrapper">
+  <label for="contains">Body contains: </label>
+  <input id="contains" class="filter-option" type="text">
+</div>
 
 <hr/>
 <button type="button" id="filterToDos">Filter Todos</button>
