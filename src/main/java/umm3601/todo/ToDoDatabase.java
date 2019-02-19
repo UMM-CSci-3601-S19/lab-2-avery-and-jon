@@ -23,6 +23,10 @@ public class ToDoDatabase {
       String status = queryParams.get("status")[0];
       filteredToDos = filterToDosByStatus(filteredToDos, status);
     }
+    if (queryParams.containsKey("contains")) {
+      String sub = queryParams.get("contains")[0];
+      filteredToDos = filterToDosByContains(filteredToDos, sub);
+    }
     if (queryParams.containsKey("limit")) {
       int limit = Integer.parseInt(queryParams.get("limit")[0]);
       filteredToDos = filterToDosByLimit(filteredToDos, limit);
